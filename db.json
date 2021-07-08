@@ -1,0 +1,17 @@
+{
+  "summer": {
+    "items": [
+      { "id": 1, "keyword": "dress", "show": "원피스" },
+      { "id": 2, "keyword": "shorts", "show": "반바지" },
+      { "id": 3, "keyword": "sleeveless", "show": "민소매" }
+    ]
+  }, 
+  "spring" : {
+    "items": [
+      { "keyword": "dress", "show": "원피스" },
+      { "keyword": "shirts", "show": "셔츠" },
+      { "keyword": "jacket", "show": "재킷" },
+      { "keyword": "trench", "show": "트렌치" }
+    ]
+  } 
+}
