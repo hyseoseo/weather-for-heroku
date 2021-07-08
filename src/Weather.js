@@ -17,7 +17,7 @@ const Weather = (props) => {
     const fetchOutfitItems = async () => {
       try {
         const result = await axios.get(
-          `https://hyseoseo.github.io/weather-db/${keyword}`
+          `https://hseo-weather-wear.herokuapp.com/api/${keyword}`
         );
         setItems(result.data.items);
         return result;
