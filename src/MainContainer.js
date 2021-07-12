@@ -80,7 +80,7 @@ const MainContainer = (props) => {
   const fetchOutfitImage = async (keyword, item) => {
     try {
       const result = await axios.get(`/${keyword}`);
-      const images = result.images;
+      const images = result.data.images;
       const urls = images.map((image) => image.url);
       console.log(urls);
       setImageUrls(urls);
