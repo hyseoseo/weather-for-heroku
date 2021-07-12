@@ -58,9 +58,9 @@ const MainContainer = (props) => {
           `https://api.openweathermap.org/data/2.5/onecall?lat=${position.latitude}&lon=${position.longitude}&exclude=minutely,hourly&appid=f9ac4cf0f4dda05daef87a55d41c8c45`,
           {}
         );
-        const dailyMax = result.data.daily[0].temp.max - 273.15;
+        const dailyMax = result.data.daily[0].feels_like.day - 273.15;
         const dailyMin = result.data.daily[0].feels_like.night - 273.15;
-        const currentTemp = result.data.current.feels_like - 273.15;
+        const currentTemp = result.data.daily[0].feels_like.morn - 273.15;
         const mainWeather = result.data.daily[0].weather[0].main;
         setWeather({
           dailyMax: dailyMax,
