@@ -7,6 +7,7 @@ const MainContainer = (props) => {
   const [position, setPosition] = useState({});
   const [weather, setWeather] = useState({});
   const [imageUrls, setImageUrls] = useState([]);
+  const [items, setItems] = useState([]);
 
   const weatherToOutfit = (min, max) => {
     let outfitKeyword;
@@ -23,8 +24,6 @@ const MainContainer = (props) => {
     } else if (min < 20 && min >= 16 && max < 22) {
       outfitKeyword = "early+summer";
     } else if (min >= 20 && max >= 27) {
-      outfitKeyword = "summer";
-    } else {
       outfitKeyword = "summer";
     }
     return outfitKeyword;
@@ -77,8 +76,25 @@ const MainContainer = (props) => {
     fetchWeather();
   }, [position]);
 
-  const fetchOutfitImage = async (keyword, item) => {
+  useEffect(() => {
+    const fetchOutfitItems = async () => {
+      try {
+        const keyword = weatherToOutfit(weather.dailyMin, weather.dailyMax);
+        const result = await axios.get(`/${keyword}`);
+        //const result = await axios.get(`http://localhost:5000/${keyword}`);
+        setItems(result.data.items);
+        return result;
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchOutfitItems();
+  }, [weather]);
+
+  const fetchOutfitImage = async (item) => {
     try {
+      const keyword = weatherToOutfit(weather.dailyMin, weather.dailyMax);
       const result = await axios.get(`/${keyword}`);
       const images = result.data.images.filter((image) => image.item === item);
       const urls = images.map((image) => image.url);
@@ -131,7 +147,7 @@ const MainContainer = (props) => {
               dailyMin={Math.floor(weather.dailyMin)}
               currentTemp={Math.floor(weather.currentTemp)}
               mainWeather={weather.mainWeather}
-              keyword={weatherToOutfit(weather.dailyMin, weather.dailyMax)}
+              items={items}
               fetchOutfitImage={fetchOutfitImage}
             />
           )}

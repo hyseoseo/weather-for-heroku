@@ -19,7 +19,7 @@ const Weather = (props) => {
         console.log(keyword);
         const result = await axios.get(`/${keyword}`);
         //const result = await axios.get(`http://localhost:5000/${keyword}`);
-        console.log(result.data.items);
+
         setItems(result.data.items);
         return result;
       } catch (error) {
