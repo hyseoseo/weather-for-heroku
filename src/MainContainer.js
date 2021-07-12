@@ -11,20 +11,18 @@ const MainContainer = (props) => {
   const weatherToOutfit = (min, max) => {
     let outfitKeyword;
     if (min <= 0) {
-      outfitKeyword = "down coat";
+      outfitKeyword = "padding";
     } else if (min <= 4) {
       outfitKeyword = "winter";
-    } else if (min <= 8) {
-      outfitKeyword = "early+winter";
-    } else if (min <= 11) {
+    } else if (min <= 9 && min > 4) {
+      outfitKeyword = "coat";
+    } else if (min <= 11 && min > 9 && max <= 14) {
       outfitKeyword = "early+spring";
-    } else if (min <= 16) {
+    } else if (min < 16 && min > 11 && max <= 17) {
       outfitKeyword = "spring";
-    } else if (min <= 19) {
-      outfitKeyword = "late+spring";
-    } else if (min >= 20 && min <= 22 && max <= 27) {
+    } else if (min < 20 && min >= 16 && max < 22) {
       outfitKeyword = "early+summer";
-    } else {
+    } else if (min >= 20 && max >= 27) {
       outfitKeyword = "summer";
     }
     return outfitKeyword;
@@ -80,9 +78,8 @@ const MainContainer = (props) => {
   const fetchOutfitImage = async (keyword, item) => {
     try {
       const result = await axios.get(`/${keyword}`);
-      const images = result.data.images;
+      const images = result.data.images.filter((image) => image.item === item);
       const urls = images.map((image) => image.url);
-      console.log(urls);
       setImageUrls(urls);
       return result;
     } catch (error) {
