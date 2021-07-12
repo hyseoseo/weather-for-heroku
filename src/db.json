@@ -4,6 +4,12 @@
       { "id": 1, "keyword": "dress", "show": "원피스" },
       { "id": 2, "keyword": "shorts", "show": "반바지" },
       { "id": 3, "keyword": "sleeveless", "show": "민소매" }
+    ],
+    "images": [
+      { "id": 1, "item": "dress", "url": "https://i.pinimg.com/564x/04/5b/5b/045b5b3ed135322888f18fca67b21318.jpg"},
+      { "id" : 2, "item": "shorts", "url": "https://i.pinimg.com/564x/d2/d1/c1/d2d1c141dbd0c5ad43b8132b98a34b48.jpg"},
+      { "id" : 3, "item": "shorts", "url": "https://i.pinimg.com/564x/78/fd/d6/78fdd6be894e297504a35f62690c1cfa.jpg"},
+      { "id" : 4, "item": "sleeveless", "url": "https://i.pinimg.com/564x/8a/79/cf/8a79cf238934994c3a61dfdc5509ce62.jpg"}
     ]
   }, 
   "spring" : {

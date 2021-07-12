@@ -39,7 +39,7 @@ const Weather = (props) => {
               return (
                 <button
                   className="outfit-keyword-button"
-                  onClick={() => fetchOutfitImage(item.keyword)}
+                  onClick={() => fetchOutfitImage(keyword, item.keyword)}
                 >{`#${item.show}`}</button>
               );
             })}

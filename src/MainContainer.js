@@ -77,6 +77,18 @@ const MainContainer = (props) => {
     fetchWeather();
   }, [position]);
 
+  const fetchOutfitImage = async (keyword, item) => {
+    try {
+      const result = await axios.get(`/${keyword}`);
+      const images = result.images;
+      const urls = images.map((image) => image.url);
+      setImageUrls(urls);
+      return result;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  /*
   const fetchOutfitImage = async (item) => {
     try {
       const keyword = `site:pinterest.com street+${weatherToOutfit(
@@ -106,7 +118,7 @@ const MainContainer = (props) => {
       console.log(error);
     }
   };
-
+*/
   return (
     <div>
       <div className="main-container">
