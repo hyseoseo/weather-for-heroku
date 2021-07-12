@@ -25,6 +25,8 @@ const MainContainer = (props) => {
       outfitKeyword = "early+summer";
     } else if (min >= 20 && max >= 27) {
       outfitKeyword = "summer";
+    } else {
+      outfitKeyword = "summer";
     }
     return outfitKeyword;
   };
