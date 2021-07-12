@@ -17,6 +17,7 @@ const Weather = (props) => {
     const fetchOutfitItems = async () => {
       try {
         const result = await axios.get(`/${keyword}`);
+        //const result = await axios.get(`http://localhost:5000/${keyword}`);
         setItems(result.data.items);
         return result;
       } catch (error) {
@@ -39,7 +40,7 @@ const Weather = (props) => {
               return (
                 <button
                   className="outfit-keyword-button"
-                  onClick={() => fetchOutfitImage(item.keyword)}
+                  onClick={() => fetchOutfitImage(keyword, item.keyword)}
                 >{`#${item.show}`}</button>
               );
             })}
