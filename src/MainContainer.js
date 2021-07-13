@@ -84,7 +84,9 @@ const MainContainer = (props) => {
   useEffect(() => {
     const fetchOutfitItems = async () => {
       try {
-        const result = await axios.get(`/${weather.keyword}`);
+        const result = await axios.get(
+          `https://hseo-weather.herokuapp.com/${weather.keyword}`
+        );
         setFashionItems(result.data.items);
         return result;
       } catch (error) {
@@ -147,24 +149,28 @@ const MainContainer = (props) => {
             />
           )}
         </div>
-        <h2>오늘의 스타일은?</h2>
-        <div className="style-keywords">
-          {defaultStyle.map((item) => (
-            <Radio item={item} name="style" onValueChange={onValueChange} />
-          ))}
+        <div className="style-container">
+          <h3>오늘의 스타일은?</h3>
+          <div className="style-keywords">
+            {defaultStyle.map((item) => (
+              <Radio item={item} name="style" onValueChange={onValueChange} />
+            ))}
+          </div>
         </div>
-        <h2>오늘의 아이템은?</h2>
-        <div className="weather-keywords">
-          {weather.keyword === undefined
-            ? null
-            : fashionItems.map((item) => {
-                return (
-                  <button
-                    className="outfit-keyword-button"
-                    onClick={() => fetchOutfitImage(item.keyword)}
-                  >{`#${item.show}`}</button>
-                );
-              })}
+        <div className="item-container">
+          <h3>오늘의 아이템은?</h3>
+          <div className="weather-keywords">
+            {weather.keyword === undefined
+              ? null
+              : fashionItems.map((item) => {
+                  return (
+                    <button
+                      className="outfit-keyword-button"
+                      onClick={() => fetchOutfitImage(item.keyword)}
+                    >{`#${item.show}`}</button>
+                  );
+                })}
+          </div>
         </div>
         <div className="outfit-container">
           {imageUrls.length ? <ImageCard images={imageUrls} /> : null}

@@ -149,6 +149,7 @@ button {
   max-width: 100%;
   justify-content: center;
   align-items: center;
+  margin-top: 20px;
 }
 
 div.radio-wrap {
@@ -185,7 +186,9 @@ input[type="radio"]:checked {
   background-color: darkturquoise;
 }
 
-.weather-container {
+.weather-container,
+.style-container,
+.item-container {
   display: flex;
   flex-flow: column nowrap;
   margin: 20px 0;
