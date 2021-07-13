@@ -144,14 +144,22 @@ const MainContainer = (props) => {
         <div className="weather-container">
           {position.latitude === undefined ||
           position.longitude === undefined ? null : (
-            <Weather
-              dailyMax={Math.floor(weather.dailyMax)}
-              dailyMin={Math.floor(weather.dailyMin)}
-              currentTemp={Math.floor(weather.currentTemp)}
-              mainWeather={weather.mainWeather}
-              items={items}
-              fetchOutfitImage={fetchOutfitImage}
-            />
+            <>
+              <div className="weather-description">
+                오늘의 체감 기온은 {weather.dailyMin}도에서 {weather.dailyMax}도
+                사이입니다.
+              </div>
+              <div className="weather-keywords">
+                {items.map((item) => {
+                  return (
+                    <button
+                      className="outfit-keyword-button"
+                      onClick={() => fetchOutfitImage(item.keyword)}
+                    >{`#${item.show}`}</button>
+                  );
+                })}
+              </div>
+            </>
           )}
         </div>
         <div className="outfit-container">
