@@ -2,30 +2,32 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import ImageCard from "./ImageCard";
 import Weather from "./Weather";
+import Radio from "./Radio";
 
 const MainContainer = (props) => {
   const [position, setPosition] = useState({});
   const [weather, setWeather] = useState({});
   const [imageUrls, setImageUrls] = useState([]);
-  const [items, setItems] = useState([]);
+  const [style, setStyle] = useState("");
+  const [fashionItems, setFashionItems] = useState([]);
 
   const weatherToOutfit = (min, max) => {
     let outfitKeyword;
     if (min <= 0) {
-      outfitKeyword = "padding";
+      outfitKeyword = "down coat";
     } else if (min <= 4) {
       outfitKeyword = "winter";
-    } else if (min <= 9 && min > 4) {
-      outfitKeyword = "coat";
-    } else if (min <= 11 && min > 9 && max <= 14) {
+    } else if (min <= 8) {
+      outfitKeyword = "early+winter";
+    } else if (min <= 11) {
       outfitKeyword = "early+spring";
-    } else if (min < 16 && min > 11 && max <= 17) {
+    } else if (min <= 16) {
       outfitKeyword = "spring";
-    } else if (min < 20 && min >= 16 && max < 22) {
+    } else if (min <= 19) {
+      outfitKeyword = "late+spring";
+    } else if (min >= 20 && min <= 22 && max <= 27) {
       outfitKeyword = "early+summer";
-    } else if (min >= 20 && max >= 27) {
-      outfitKeyword = "summer";
-    } else {
+    } else if (min > 22 && max > 27) {
       outfitKeyword = "summer";
     }
     return outfitKeyword;
@@ -59,15 +61,16 @@ const MainContainer = (props) => {
           `https://api.openweathermap.org/data/2.5/onecall?lat=${position.latitude}&lon=${position.longitude}&exclude=minutely,hourly&appid=f9ac4cf0f4dda05daef87a55d41c8c45`,
           {}
         );
-        const dailyMax = result.data.daily[0].feels_like.day - 273.15;
+        const dailyMax = result.data.daily[0].temp.max - 273.15;
         const dailyMin = result.data.daily[0].feels_like.night - 273.15;
-        const currentTemp = result.data.daily[0].feels_like.morn - 273.15;
+        const currentTemp = result.data.current.feels_like - 273.15;
         const mainWeather = result.data.daily[0].weather[0].main;
         setWeather({
           dailyMax: dailyMax,
           dailyMin: dailyMin,
           currentTemp: currentTemp,
           mainWeather: mainWeather,
+          keyword: weatherToOutfit(dailyMin, dailyMax),
         });
         return result;
       } catch (error) {
@@ -81,10 +84,8 @@ const MainContainer = (props) => {
   useEffect(() => {
     const fetchOutfitItems = async () => {
       try {
-        const keyword = weatherToOutfit(weather.dailyMin, weather.dailyMax);
-        const result = await axios.get(`/${keyword}`);
-        //const result = await axios.get(`http://localhost:5000/${keyword}`);
-        setItems(result.data.items);
+        const result = await axios.get(`/${weather.keyword}`);
+        setFashionItems(result.data.items);
         return result;
       } catch (error) {
         console.log(error);
@@ -96,25 +97,7 @@ const MainContainer = (props) => {
 
   const fetchOutfitImage = async (item) => {
     try {
-      const keyword = weatherToOutfit(weather.dailyMin, weather.dailyMax);
-      const result = await axios.get(`/${keyword}`);
-      const images = result.data.images.filter((image) => image.item === item);
-      const urls = images.map((image) => image.url);
-      setImageUrls(urls);
-      return result;
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  /*
-  const fetchOutfitImage = async (item) => {
-    try {
-      const keyword = `site:pinterest.com street+${weatherToOutfit(
-        weather.dailyMin,
-        weather.dailyMax
-      )}+${item}+outfit`;
-      console.log(keyword);
+      const keyword = `site:pinterest.com street+${weather.keyword}+${item}+outfit`;
       const result = await axios.get(
         `https://www.googleapis.com/customsearch/v1`,
         {
@@ -137,30 +120,51 @@ const MainContainer = (props) => {
       console.log(error);
     }
   };
-*/
+
+  const onValueChange = (value) => {
+    setStyle(value);
+  };
+
+  const defaultStyle = [
+    { id: 1, value: "minimal" },
+    { id: 2, value: "lovely" },
+    { id: 3, value: "french chic" },
+  ];
+
   return (
     <div>
       <div className="main-container">
         <div className="weather-container">
           {position.latitude === undefined ||
           position.longitude === undefined ? null : (
-            <>
-              <div className="weather-description">
-                오늘의 체감 기온은 {weather.dailyMin}도에서 {weather.dailyMax}도
-                사이입니다.
-              </div>
-              <div className="weather-keywords">
-                {items.map((item) => {
-                  return (
-                    <button
-                      className="outfit-keyword-button"
-                      onClick={() => fetchOutfitImage(item.keyword)}
-                    >{`#${item.show}`}</button>
-                  );
-                })}
-              </div>
-            </>
+            <Weather
+              dailyMax={Math.floor(weather.dailyMax)}
+              dailyMin={Math.floor(weather.dailyMin)}
+              currentTemp={Math.floor(weather.currentTemp)}
+              mainWeather={weather.mainWeather}
+              keyword={weatherToOutfit(weather.dailyMin, weather.dailyMax)}
+              fetchOutfitImage={fetchOutfitImage}
+            />
           )}
+        </div>
+        <h2>오늘의 스타일은?</h2>
+        <div className="style-keywords">
+          {defaultStyle.map((item) => (
+            <Radio item={item} name="style" onValueChange={onValueChange} />
+          ))}
+        </div>
+        <h2>오늘의 아이템은?</h2>
+        <div className="weather-keywords">
+          {weather.keyword === undefined
+            ? null
+            : fashionItems.map((item) => {
+                return (
+                  <button
+                    className="outfit-keyword-button"
+                    onClick={() => fetchOutfitImage(item.keyword)}
+                  >{`#${item.show}`}</button>
+                );
+              })}
         </div>
         <div className="outfit-container">
           {imageUrls.length ? <ImageCard images={imageUrls} /> : null}
