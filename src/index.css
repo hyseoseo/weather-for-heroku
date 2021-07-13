@@ -119,6 +119,7 @@ button {
   align-items: center;
   margin: 0;
   animation: fadein 2s;
+  font-family: 'Cafe24SsurroundAir'
   }
 
   @keyframes fadein {

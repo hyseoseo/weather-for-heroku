@@ -97,7 +97,7 @@ const MainContainer = (props) => {
 
   const fetchOutfitImage = async (item) => {
     try {
-      const keyword = `site:pinterest.com street+${weather.keyword}+${item}+outfit`;
+      const keyword = `site:pinterest.com street+${weather.keyword}+${item}+${style}+outfit`;
       const result = await axios.get(
         `https://www.googleapis.com/customsearch/v1`,
         {
