@@ -1,15 +1,19 @@
 import React, { useState, useEffect } from "react";
 import ImageCard from "./ImageCard";
 import axios from "axios";
+import QueryString from "qs";
 
-const ImageContainer = ({ match }) => {
-  const keyword = match.params.keyword;
+const ImageContainer = ({ match, location }) => {
+  const style = match.params.style;
+  const weather = QueryString.parse(location.search, {
+    ignoreQueryPrefix: true,
+  });
   const [imageUrls, setImageUrls] = useState([]);
 
   useEffect(() => {
     const fetchOutfitImage = async () => {
       try {
-        const searchKeyword = `site:pinterest.com street+${keyword}+outfit`;
+        const searchKeyword = `site:pinterest.com street+${style}+${weather}+outfit`;
         const result = await axios.get(
           `https://www.googleapis.com/customsearch/v1`,
           {
@@ -67,7 +71,7 @@ const ImageContainer = ({ match }) => {
 
   return (
     <div className="outfit-container">
-      {console.log(match)}
+      {console.log(weather)}
       <ImageCard images={imageUrls} />
     </div>
   );

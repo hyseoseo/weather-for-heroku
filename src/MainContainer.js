@@ -177,7 +177,7 @@ const MainContainer = (props) => {
                 })}
           </div>
         </div>
-        <Link to={`/${style}`}>Image</Link>
+        <Link to={`/${style}?keyword=${weather.keyword}`}>Image</Link>
       </div>
     </div>
   );

@@ -10,7 +10,7 @@ function App() {
     <div>
       <Header className="header-container" />
       <Route path="/" exact={true} component={MainContainer} />
-      <Route path="/:keyword" component={ImageContainer} />
+      <Route path="/:style" component={ImageContainer} />
     </div>
   );
 }
