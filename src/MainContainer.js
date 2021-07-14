@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import axios from "axios";
 import ImageCard from "./ImageCard";
 import Weather from "./Weather";
 import Radio from "./Radio";
+import ImageContainer from "./ImageContainer";
 
 const MainContainer = (props) => {
   const [position, setPosition] = useState({});
@@ -117,6 +119,7 @@ const MainContainer = (props) => {
         images.push(result.data.items[i].link);
       }
       setImageUrls(images);
+      console.log(imageUrls);
       return result;
     } catch (error) {
       console.log(error);
@@ -125,12 +128,14 @@ const MainContainer = (props) => {
 
   const onValueChange = (value) => {
     setStyle(value);
+    console.log(style);
   };
 
   const defaultStyle = [
-    { id: 1, value: "minimal" },
-    { id: 2, value: "lovely" },
-    { id: 3, value: "french chic" },
+    { id: 1, value: "minimal", show: "상수룩" },
+    { id: 2, value: "chic", show: "환불룩" },
+    { id: 3, value: "romantic", show: "로맨틱-성공적룩" },
+    { id: 4, value: "cozy", show: "놀이터 노역룩" },
   ];
 
   return (
@@ -172,9 +177,7 @@ const MainContainer = (props) => {
                 })}
           </div>
         </div>
-        <div className="outfit-container">
-          {imageUrls.length ? <ImageCard images={imageUrls} /> : null}
-        </div>
+        <Link to={`/${style}`}>Image</Link>
       </div>
     </div>
   );

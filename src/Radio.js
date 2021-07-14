@@ -17,7 +17,7 @@ const Radio = (props) => {
         value={item.value}
         onChange={(e) => handleChange(e)}
       />
-      <label for={item.id}>{item.value}</label>
+      <label for={item.id}>{item.show}</label>
     </div>
   );
 };
