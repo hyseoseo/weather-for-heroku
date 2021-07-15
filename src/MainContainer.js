@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import ImageCard from "./ImageCard";
 import Weather from "./Weather";
 import Radio from "./Radio";
-import ImageContainer from "./ImageContainer";
+import ImageCard from "./ImageCard";
 
 const MainContainer = (props) => {
   const [position, setPosition] = useState({});
   const [weather, setWeather] = useState({});
   const [imageUrls, setImageUrls] = useState([]);
   const [style, setStyle] = useState("");
+  const [item, setItem] = useState("");
   const [fashionItems, setFashionItems] = useState([]);
 
   const weatherToOutfit = (min, max) => {
@@ -99,9 +99,9 @@ const MainContainer = (props) => {
     fetchOutfitItems();
   }, [weather]);
 
-  const fetchOutfitImage = async (item) => {
+  const fetchOutfitImage = async (look) => {
     try {
-      const keyword = `site:pinterest.com street+${weather.keyword}+${item}+${style}+outfit`;
+      const keyword = `site:pinterest.com ${weather.keyword}+${look}+outfit`;
       const result = await axios.get(
         `https://www.googleapis.com/customsearch/v1`,
         {
@@ -126,15 +126,19 @@ const MainContainer = (props) => {
     }
   };
 
-  const onValueChange = (value) => {
+  const onStyleChange = (value) => {
     setStyle(value);
-    console.log(style);
+  };
+
+  const onItemChange = (value) => {
+    setItem(value);
+    console.log(`item: ${item}`);
   };
 
   const defaultStyle = [
     { id: 1, value: "minimal", show: "상수룩" },
-    { id: 2, value: "chic", show: "환불룩" },
-    { id: 3, value: "romantic", show: "로맨틱-성공적룩" },
+    { id: 2, value: "rockchic", show: "환불룩" },
+    { id: 3, value: "romantic", show: "로맨틱 성공적룩" },
     { id: 4, value: "cozy", show: "놀이터 노역룩" },
   ];
 
@@ -155,29 +159,21 @@ const MainContainer = (props) => {
           )}
         </div>
         <div className="style-container">
-          <h3>오늘의 스타일은?</h3>
+          오늘 당신의 스타일은?
           <div className="style-keywords">
-            {defaultStyle.map((item) => (
-              <Radio item={item} name="style" onValueChange={onValueChange} />
-            ))}
+            {defaultStyle.map((element) => {
+              return (
+                <button
+                  className="outfit-keyword-button"
+                  onClick={() => fetchOutfitImage(element.value)}
+                >
+                  {`#${element.show}`}
+                </button>
+              );
+            })}
           </div>
         </div>
-        <div className="item-container">
-          <h3>오늘의 아이템은?</h3>
-          <div className="weather-keywords">
-            {weather.keyword === undefined
-              ? null
-              : fashionItems.map((item) => {
-                  return (
-                    <button
-                      className="outfit-keyword-button"
-                      onClick={() => fetchOutfitImage(item.keyword)}
-                    >{`#${item.show}`}</button>
-                  );
-                })}
-          </div>
-        </div>
-        <Link to={`/${style}?keyword=${weather.keyword}`}>Image</Link>
+        <ImageCard images={imageUrls} />
       </div>
     </div>
   );

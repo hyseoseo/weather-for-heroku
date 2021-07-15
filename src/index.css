@@ -119,7 +119,8 @@ button {
   align-items: center;
   margin: 0;
   animation: fadein 2s;
-  font-family: 'Cafe24SsurroundAir'
+  font-family: 'Cafe24SsurroundAir';
+  color: #333;
   }
 
   @keyframes fadein {
@@ -144,12 +145,13 @@ button {
 
 .style-keywords {
   display: flex;
+  flex: 1 0 auto;
   flex-flow: row nowrap;
   width: 60vw;
   max-width: 100%;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  margin-top: 20px;
+  color: #333;
 }
 
 div.radio-wrap {
@@ -187,18 +189,44 @@ input[type="radio"]:checked {
 }
 
 .weather-container,
-.style-container,
 .item-container {
   display: flex;
   flex-flow: column nowrap;
-  margin: 20px 0;
-  padding: 10px 20px 0 20px;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  padding: 0 10px;
   justify-content: center;
   align-items: center;
   font-size: 1.8rem;
   font-family: 'Cafe24SsurroundAir';
   font-weight: 400;
+  color: #333;
   animation: fadein 2s;
+}
+
+.style-container {
+  display: flex;
+  flex-flow: column nowrap;
+  margin: 20px 0;
+  padding: 0 10px;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.8rem;
+  font-family: 'Cafe24SsurroundAir';
+  font-weight: 400;
+  color: #333;
+  animation: fadein 2s;
+}
+
+.style-keywords {
+  display: flex;
+  flex: 0 0 auto;
+  flex-flow: row nowrap;
+  width: 70vw;
+  max-width: 100%;
+  justify-content: center;
+  align-items: center;
+  color: #333;
 }
 
 .weather-keywords {
@@ -209,6 +237,7 @@ input[type="radio"]:checked {
   margin: 10px 60px;
   justify-content: center;
   align-items: center;
+  color: #333;
 }
 
 .outfit-container {
@@ -221,7 +250,7 @@ input[type="radio"]:checked {
   margin: 0;
   margin-top: 20px;
 }
-
+/*
 .get-outfit-button {
   margin: 0;
   border-radius: 8px;
@@ -230,7 +259,7 @@ input[type="radio"]:checked {
   font-size: 2.5rem;
   font-family: 'Cafe24SsurroundAir';
   font-weight: 500;
-  width: 200px;
+  width: 300px;
   height: 50px;
 }
 
@@ -241,7 +270,7 @@ input[type="radio"]:checked {
   background-color: darkturquoise;
   border-radius: 8px;
 }
-
+*/
 .outfit-keyword-button {
   margin: 0;
   border-radius: 8px;
@@ -249,7 +278,8 @@ input[type="radio"]:checked {
   font-size: 1.5rem;
   font-family: 'Cafe24SsurroundAir';
   font-weight: 500;
-  width: 100px;
+  text-justify: center;
+  width: 185px;
   height: 50px;
 }
 

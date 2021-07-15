@@ -1,9 +1,9 @@
 {
   "summer": {
     "items": [
-      { "id": 1, "keyword": "dress", "show": "원피스" },
-      { "id": 2, "keyword": "shorts", "show": "반바지" },
-      { "id": 3, "keyword": "sleeveless", "show": "민소매" }
+      { "id": 1, "value": "dress", "show": "원피스" },
+      { "id": 2, "value": "shorts", "show": "반바지" },
+      { "id": 3, "value": "sleeveless", "show": "민소매" }
     ],
     "images": [
       { "id": 1, "item": "dress", "url": "https://i.pinimg.com/564x/04/5b/5b/045b5b3ed135322888f18fca67b21318.jpg"},

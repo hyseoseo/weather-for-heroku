@@ -1,23 +1,23 @@
 import React from "react";
 
 const Radio = (props) => {
-  const { item, name, onValueChange } = props;
+  const { id, value, name, show, onValueChange } = props;
 
   const handleChange = (event) => {
-    const selectedStyle = event.target.value;
-    onValueChange(selectedStyle);
+    const selected = event.target.value;
+    onValueChange(selected);
   };
 
   return (
     <div className="radio-wrap">
       <input
         type="radio"
-        id={item.id}
+        id={id}
         name={name}
-        value={item.value}
+        value={value}
         onChange={(e) => handleChange(e)}
       />
-      <label htmlFor={item.id}>{item.show}</label>
+      <label htmlFor={id}>{show}</label>
     </div>
   );
 };
