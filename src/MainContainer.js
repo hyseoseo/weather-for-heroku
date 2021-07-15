@@ -85,7 +85,7 @@ const MainContainer = (props) => {
         const result = await axios.get(
           `https://hseo-weather.herokuapp.com/styles`
         );
-        setStyles(result.data.keyword);
+        setStyles(result.data);
         console.log(styles);
         return result;
       } catch (error) {
