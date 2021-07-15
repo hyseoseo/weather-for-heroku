@@ -8,8 +8,8 @@ const MainContainer = (props) => {
   const [position, setPosition] = useState({});
   const [weather, setWeather] = useState({});
   const [imageUrls, setImageUrls] = useState([]);
-  //const [styles, setStyles] = useState([]);
-  const { styles } = props;
+  const [styles, setStyles] = useState([]);
+  //const { styles } = props;
 
   const weatherToOutfit = (min, max) => {
     let outfitKeyword;
@@ -82,7 +82,6 @@ const MainContainer = (props) => {
   }, [position]);
 
   //heroku json-server 이용시 매우 느림...
-  /*
   useEffect(() => {
     const fetchStyles = async () => {
       try {
@@ -99,7 +98,6 @@ const MainContainer = (props) => {
 
     fetchStyles();
   }, []);
-*/
 
   const fetchOutfitImage = async (look) => {
     try {
