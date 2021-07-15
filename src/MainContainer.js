@@ -83,9 +83,10 @@ const MainContainer = (props) => {
     const fetchStyles = async () => {
       try {
         const result = await axios.get(
-          `https://hseo-weather.herokuapp.com/style`
+          `https://hseo-weather.herokuapp.com/styles`
         );
-        setStyles(result.data);
+        setStyles(result.data.keyword);
+        console.log(styles);
         return result;
       } catch (error) {
         console.log(error);

@@ -1,10 +1,12 @@
 {
-  "style": [
-    { "id": 1, "value": "minimal", "show": "상수룩" },
-    { "id": 2, "value": "rockchic", "show": "환불룩" },
-    { "id": 3, "value": "romantic", "show": "로맨틱 성공적룩" },
-    { "id": 4, "value": "cozy", "show": "놀이터 노역룩" }
-  ],
+  "styles": {
+    "keyword": [
+      { "id": 1, "value": "minimal", "show": "상수룩" },
+      { "id": 2, "value": "rockchic", "show": "환불룩" },
+      { "id": 3, "value": "romantic", "show": "로맨틱 성공적룩" },
+      { "id": 4, "value": "cozy", "show": "놀이터 노역룩" }
+    ]
+  },
   "summer": {
     "items": [
       { "id": 1, "value": "dress", "show": "원피스" },
