@@ -1,17 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import axios from "axios";
 import Weather from "./Weather";
-import Radio from "./Radio";
 import ImageCard from "./ImageCard";
 
 const MainContainer = (props) => {
   const [position, setPosition] = useState({});
   const [weather, setWeather] = useState({});
   const [imageUrls, setImageUrls] = useState([]);
-  const [style, setStyle] = useState("");
-  const [item, setItem] = useState("");
-  const [fashionItems, setFashionItems] = useState([]);
+  const [styles, setStyles] = useState([]);
 
   const weatherToOutfit = (min, max) => {
     let outfitKeyword;
@@ -84,20 +80,20 @@ const MainContainer = (props) => {
   }, [position]);
 
   useEffect(() => {
-    const fetchOutfitItems = async () => {
+    const fetchStyles = async () => {
       try {
         const result = await axios.get(
-          `https://hseo-weather.herokuapp.com/${weather.keyword}`
+          `https://hseo-weather.herokuapp.com/style`
         );
-        setFashionItems(result.data.items);
+        setStyles(result.data);
         return result;
       } catch (error) {
         console.log(error);
       }
     };
 
-    fetchOutfitItems();
-  }, [weather]);
+    fetchStyles();
+  }, []);
 
   const fetchOutfitImage = async (look) => {
     try {
@@ -126,22 +122,6 @@ const MainContainer = (props) => {
     }
   };
 
-  const onStyleChange = (value) => {
-    setStyle(value);
-  };
-
-  const onItemChange = (value) => {
-    setItem(value);
-    console.log(`item: ${item}`);
-  };
-
-  const defaultStyle = [
-    { id: 1, value: "minimal", show: "상수룩" },
-    { id: 2, value: "rockchic", show: "환불룩" },
-    { id: 3, value: "romantic", show: "로맨틱 성공적룩" },
-    { id: 4, value: "cozy", show: "놀이터 노역룩" },
-  ];
-
   return (
     <div>
       <div className="main-container">
@@ -161,13 +141,13 @@ const MainContainer = (props) => {
         <div className="style-container">
           오늘 당신의 스타일은?
           <div className="style-keywords">
-            {defaultStyle.map((element) => {
+            {styles.map((style) => {
               return (
                 <button
                   className="outfit-keyword-button"
-                  onClick={() => fetchOutfitImage(element.value)}
+                  onClick={() => fetchOutfitImage(style.value)}
                 >
-                  {`#${element.show}`}
+                  {`#${style.show}`}
                 </button>
               );
             })}
