@@ -2,14 +2,18 @@ import React, { useState } from "react";
 import { faChevronLeft } from "@fortawesome/free-solid-svg-icons";
 import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import CarouselStyled from "./Carousel.styles";
 
 const Carousel = (props) => {
-  const { imgs } = props;
-
+  const { images } = props;
   const [currentImage, setCurrentImage] = useState(0);
 
+  if (images.length === 0) {
+    return null;
+  }
+
   const handleRight = () => {
-    if (currentImage === imgs.length - 1) {
+    if (currentImage === images.length - 1) {
       setCurrentImage(0);
     } else {
       setCurrentImage(currentImage + 1);
@@ -18,17 +22,17 @@ const Carousel = (props) => {
 
   const handleLeft = () => {
     if (currentImage === 0) {
-      setCurrentImage(imgs.length - 1);
+      setCurrentImage(images.length - 1);
     } else {
       setCurrentImage(currentImage - 1);
     }
   };
 
   return (
-    <div className="carousel">
+    <CarouselStyled>
       <div
         className="carousel-inner"
-        style={{ backgroundImage: `url(${imgs[currentImage]})` }}
+        style={{ backgroundImage: `url(${images[currentImage]})` }}
       >
         <div className="left" onClick={handleLeft}>
           <FontAwesomeIcon icon={faChevronLeft} />
@@ -38,7 +42,7 @@ const Carousel = (props) => {
           <FontAwesomeIcon icon={faChevronRight} />
         </div>
       </div>
-    </div>
+    </CarouselStyled>
   );
 };
 

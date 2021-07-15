@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Weather from "./Weather";
-import ImageCard from "./ImageCard";
+import Style from "./Style";
+import Carousel from "./Carousel";
 
 const MainContainer = (props) => {
   const [position, setPosition] = useState({});
   const [weather, setWeather] = useState({});
   const [imageUrls, setImageUrls] = useState([]);
-  const [styles, setStyles] = useState([]);
+  //const [styles, setStyles] = useState([]);
+  const { styles } = props;
 
   const weatherToOutfit = (min, max) => {
     let outfitKeyword;
@@ -79,6 +81,8 @@ const MainContainer = (props) => {
     fetchWeather();
   }, [position]);
 
+  //heroku json-server 이용시 매우 느림...
+  /*
   useEffect(() => {
     const fetchStyles = async () => {
       try {
@@ -95,6 +99,7 @@ const MainContainer = (props) => {
 
     fetchStyles();
   }, []);
+*/
 
   const fetchOutfitImage = async (look) => {
     try {
@@ -124,40 +129,21 @@ const MainContainer = (props) => {
   };
 
   return (
-    <div>
-      <div className="main-container">
-        <div className="weather-container">
-          {position.latitude === undefined ||
-          position.longitude === undefined ? null : (
-            <Weather
-              dailyMax={Math.floor(weather.dailyMax)}
-              dailyMin={Math.floor(weather.dailyMin)}
-              currentTemp={Math.floor(weather.currentTemp)}
-              mainWeather={weather.mainWeather}
-              keyword={weatherToOutfit(weather.dailyMin, weather.dailyMax)}
-              fetchOutfitImage={fetchOutfitImage}
-            />
-          )}
-        </div>
-        <div className="style-container">
-          오늘 당신의 스타일은?
-          <div className="style-keywords">
-            {styles.map((style) => {
-              return (
-                <button
-                  className="outfit-keyword-button"
-                  onClick={() => fetchOutfitImage(style.value)}
-                >
-                  {`#${style.show}`}
-                </button>
-              );
-            })}
-          </div>
-        </div>
-        <ImageCard images={imageUrls} />
-      </div>
+    <div className="main-container">
+      <Weather position={position} weather={weather} />
+      <Style styles={styles} fetchOutfitImage={fetchOutfitImage} />
+      <Carousel images={imageUrls} />
     </div>
   );
 };
 
 export default MainContainer;
+
+MainContainer.defaultProps = {
+  styles: [
+    { id: 1, value: "minimal", show: "상수룩" },
+    { id: 2, value: "rockchic", show: "환불룩" },
+    { id: 3, value: "romantic", show: "로맨틱 성공적룩" },
+    { id: 4, value: "cozy", show: "놀이터 노역룩" },
+  ],
+};
