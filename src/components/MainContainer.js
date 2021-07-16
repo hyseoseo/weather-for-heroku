@@ -81,7 +81,7 @@ const MainContainer = (props) => {
     fetchWeather();
   }, [position]);
 
-  //heroku json-server 이용시 매우 느림...
+  //heroku json-server 이용시 로딩 시간이..?
   useEffect(() => {
     const fetchStyles = async () => {
       try {

@@ -71,6 +71,7 @@ button {
   justify-content: flex-start;
   align-items: center;
   background-color: white;
+}
 
 .main-container {
   flex: 90%;
@@ -97,7 +98,7 @@ button {
   }
 
   @media only screen and (max-width: 768px) {
-    #root, .main-container, .header-container, .carousel {
+    .main-container, .header-container, .carousel {
       width: 100vw;
       margin: 0;
     }
@@ -110,7 +111,7 @@ button {
   }
 
   @media only screen and (max-width: 480px) {
-    #root, .header-container, .main-container, .carousel {
+    .header-container, .main-container, .carousel {
       width: 100vw;
       margin: 0;
     }

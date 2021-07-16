@@ -17,11 +17,11 @@ const StyleStyled = styled.div`
   .style-keywords {
     margin-top: 10px;
     display: flex;
-    flex: 0 0 auto;
+    flex: 1 0 auto;
     flex-flow: row nowrap;
     width: 65vw;
     max-width: 100%;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
     color: #333;
   }
@@ -46,7 +46,17 @@ const StyleStyled = styled.div`
     color: darkturquoise;
   }
 
+  @media only screen and (max-width: 768px) {
+    .style-kewords {
+      width: 80vw;
+    }
+  }
+
   @media only screen and (max-width: 480px) {
+    .style-kewords {
+      width: 80vw;
+    }
+
     .style-keyword-button {
       margin: 0;
       border-radius: 4px;
