@@ -1,70 +1,38 @@
-# Getting Started with Create React App
+# 오늘의복 
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## 1. 배포 주소
 
-## Available Scripts
+https://hseo-weather.herokuapp.com/
 
-In the project directory, you can run:
+<br>
 
-### `npm start`
+## 2. 구현 사항
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- geolocation 이용한 사용자 위치 파악
+- openweather.org API 활용하여 날씨 정보 파악
+- 날씨 정보 및 사용자가 선택한 스타일 키워드를 바탕으로 Google customsearch한 이미지를 사용자에게 전달
+- 이미지를 가로로 슬라이드하여 표시하는 방식으로 구현
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+<br>
 
-### `npm test`
+## 3. 설치 및 시작하는 법
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+이 프로젝트는 Create React App으로 생성되었습니다.
 
-### `npm run build`
+- npm i 
+: 프로젝트에 필요한 npm packages, node_modules 다운로드
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- npm run start
+: 개발모드로 웹 환경을 시작하는 명령어입니다.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- npm run build
+: 빌드하는 명령어로 현재 설정되어있는 환경 변수에 따라 빌드 됩니다. (cra 기본설정)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+<br>
 
-### `npm run eject`
+## 4. 기능 동작 영상
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+![Hnet-image (6)](https://user-images.githubusercontent.com/59982256/128224851-67c18c93-f8bd-4fcd-88e9-1a225666021a.gif)
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+<br>
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
